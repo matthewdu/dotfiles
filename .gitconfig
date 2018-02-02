@@ -1,13 +1,13 @@
 [user]
-        email = du.matthew@gmail.com
-        name = Matthew Du
+  email = du.matthew@gmail.com
+  name = Matthew Du
 
 [core]
-        editor = vim
+  editor = vim
 
 [alias]
-        co = checkout
-        st = status
+  co = checkout
+  st = status
 	br = branch
 	b = branch
 	lg = log --all --graph --abbrev-commit --date=relative --pretty=format:'%C(bold blue)%h - %C(reset)%C(green)(%ar)%C(reset) - %s %C(dim)- %an%C(reset)%C(yellow)%d'
