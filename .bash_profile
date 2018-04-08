@@ -23,7 +23,7 @@ HISTTIMEFORMAT="%Y-%m-%d %T "             # Add timestamp to history
 
 # notes
 NOTES_DIR="$HOME/notes"                                   # Directory to store notes
-notes_filename() {
-    echo $(date +"%Y-%m-%d").md
+function n() {
+    filename=$(date +%Y-%m-%d.md)
+    vim $NOTES_DIR/$filename
 }
-alias n="vim $NOTES_DIR/$(notes_filename)"   # Notes filenames are the date. ie `2018-04-07.md`
