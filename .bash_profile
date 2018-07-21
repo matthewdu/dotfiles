@@ -24,6 +24,25 @@ HISTTIMEFORMAT="%Y-%m-%d %T "             # Add timestamp to history
 # notes
 NOTES_DIR="$HOME/notes"                                   # Directory to store notes
 function n() {
-    filename=$(date +%Y-%m-%d.md)
-    vim $NOTES_DIR/$filename
+    local arg=$1
+    if [ "$arg" = "summary" ]; then
+        (
+            # Print title in bold
+            printf "\e[1;4mNotes Summary\n"
+
+            local files=($NOTES_DIR/*)
+            # In reverse alphabetic order
+            for ((i = ${#files[@]} - 1; i >= 0; i--)); do
+                # Print file name in red
+                printf "\n\e[31m%s\n" "$(basename "${files[i]}")"
+                # Print file contents
+                printf "%s\n" "$(< ${files[i]})"
+            done
+
+        ) | less -R
+    else
+        local filename=$(date +%Y-%m-%d.md)
+        local filepath="$NOTES_DIR/$filename"
+        vim $filepath
+    fi
 }
