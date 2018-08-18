@@ -34,7 +34,7 @@ function n() {
             # In reverse alphabetic order
             for ((i = ${#files[@]} - 1; i >= 0; i--)); do
                 # Print file name in red
-                printf "\n\e[31m%s\n" "$(basename "${files[i]}")"
+                printf "\n\e[31m%s\n" $(basename ${files[i]})
                 # Print file contents
                 printf "%s\n" "$(< ${files[i]})"
             done
