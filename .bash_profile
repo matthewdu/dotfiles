@@ -24,8 +24,12 @@ HISTTIMEFORMAT="%Y-%m-%d %T "             # Add timestamp to history
 # notes
 NOTES_DIR="$HOME/notes"                                   # Directory to store notes
 function n() {
-    local arg=$1
-    if [ "$arg" = "summary" ]; then
+    if [[ -z $NOTES_DIR ]]; then
+        echo "NOTES_DIR environment variable not set"
+        return
+    fi
+
+    if [[ $1 = "summary" ]]; then
         (
             # Print title in bold
             printf "\e[1;4mNotes Summary\n"
@@ -40,6 +44,8 @@ function n() {
             done
 
         ) | less -R
+    elif [[ $1 == *.md ]]; then
+        vim $NOTES_DIR/$1
     else
         local filename=$(date +%Y-%m-%d.md)
         local filepath="$NOTES_DIR/$filename"
