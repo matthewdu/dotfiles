@@ -52,3 +52,13 @@ function n() {
         vim $filepath
     fi
 }
+_notes_completions()
+{
+  if [[ "$COMP_CWORD" -ge "2" ]]; then
+    return
+  fi
+
+  COMPREPLY+=($(compgen -W "summary" "${COMP_WORDS[1]}"))
+  COMPREPLY+=($(compgen -W "$(ls $NOTES_DIR)" "${COMP_WORDS[1]}"))
+}
+complete -F _notes_completions n
